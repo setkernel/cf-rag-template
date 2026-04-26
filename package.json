@@ -1,0 +1,21 @@
+{
+  "name": "cf-rag-template",
+  "version": "1.0.0",
+  "description": "Production RAG pipeline on Cloudflare Workers + Vectorize + D1 + Workers AI. ~200 lines of TypeScript, no LangChain.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "db:init": "wrangler d1 execute rag-db --local --file=./migrations/0001_init.sql",
+    "db:init:prod": "wrangler d1 execute rag-db --remote --file=./migrations/0001_init.sql"
+  },
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260401.0",
+    "typescript": "^5.6.0",
+    "wrangler": "^4.82.0"
+  },
+  "keywords": ["cloudflare", "workers", "rag", "ai", "vectorize", "d1", "anthropic", "claude"]
+}

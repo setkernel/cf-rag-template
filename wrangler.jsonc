@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "cf-rag-template",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-12",
+
+  // Workers AI binding for embeddings (BGE) and generation (Llama 3.3).
+  "ai": { "binding": "AI" },
+
+  // D1 stores source-of-truth chunk text. Vectorize stores only the vectors.
+  // Create with: npx wrangler d1 create rag-db
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "rag-db",
+      "database_id": "REPLACE_WITH_YOUR_D1_ID"
+    }
+  ],
+
+  // Vectorize index for similarity search.
+  // Create with: npx wrangler vectorize create rag-index --dimensions=768 --metric=cosine
+  "vectorize": [
+    { "binding": "VEC", "index_name": "rag-index" }
+  ],
+
+  // Set ANTHROPIC_API_KEY as a secret:
+  //   npx wrangler secret put ANTHROPIC_API_KEY
+
+  "observability": {
+    "enabled": true
+  }
+}
