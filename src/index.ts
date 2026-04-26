@@ -36,7 +36,11 @@ function chunk(text: string, size = 800, overlap = 100): string[] {
 // BGE base = 768 dims, free at low volume on Workers AI, ~18 ms in-Worker.
 async function embed(env: Env, texts: string[]): Promise<number[][]> {
   const res = await env.AI.run('@cf/baai/bge-base-en-v1.5', { text: texts });
-  return res.data;
+  // The binding's typings union sync + async. We don't pass `stream` so it's
+  // the synchronous form, but cast defensively to keep this template portable.
+  const data = (res as { data?: number[][] }).data;
+  if (!data) throw new Error('Workers AI BGE returned no data — model may be unavailable');
+  return data;
 }
 
 // ─── 3. Store ────────────────────────────────────────────────────────────────
