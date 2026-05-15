@@ -4,6 +4,8 @@ Production RAG pipeline on Cloudflare Workers. ~200 lines of TypeScript. No Lang
 
 > Companion to: [Production RAG on Cloudflare Without LangChain](https://setkernel.com/blog/production-rag-cloudflare-without-langchain)
 
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/setkernel/cf-rag-template)
+
 ## What it is
 
 The five primitives of retrieval-augmented generation, mapped to one Cloudflare service each:
